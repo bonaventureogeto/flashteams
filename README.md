@@ -2,9 +2,7 @@
 
 # Introduction
 
-The goal of this project is to create a simple to use team management system where one can create a team or organization,
-
-invite memebers to join, and members can see their teammates.
+The goal of this project is to create a simple to use team management system where one can create a team or organization, invite memebers to join, and members can see their teammates.
 
 <!-- ![Default Home View](__screenshots/home.png?raw=true "Title") -->
 
