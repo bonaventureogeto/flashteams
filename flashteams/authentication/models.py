@@ -110,4 +110,22 @@ class User(AbstractUser, BaseAbstractModel):
         return token.decode('utf-8')
 
     
+class BlackList(BaseAbstractModel):
+    """
+    This class defines black list model.
+    Tokens of logged out users are stored here.
+    """
+
+    token = models.CharField(max_length=200, unique=True)
+
+    objects = models.Manager()
+
+    @staticmethod
+    def delete_tokens_older_than_a_day():
+        """
+        This method deletes tokens older than one day
+        """
+        past_24 = datetime.now() - timedelta(hours=24)
+
+        BlackList.objects.filter(created_at__lt=past_24).delete()
 
