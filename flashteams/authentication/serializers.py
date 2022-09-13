@@ -67,3 +67,27 @@ class RegistrationSerializer(serializers.ModelSerializer):
         Check if passwords match
         """
         return password1 == password2
+
+
+class LoginSerializer(serializers.Serializer):
+    """
+    serializer classs for login
+    """
+
+    email = serializers.EmailField()
+    password = serializers.CharField(max_length=255, min_length=8, write_only=True)
+    token = serializers.CharField(read_only=True)
+
+    def validate(self, data):
+        """validate the data"""
+
+        email = data.get("email", None)
+        password = data.get("password", None)
+        user = authenticate(username=email, password=password)
+
+        if user is None:
+            raise serializers.ValidationError(
+                {"invalid": "The email or password is wrong"}
+            )
+        user = {"email": user.email, "token": user.token}
+        return user
