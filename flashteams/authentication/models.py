@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import (AbstractUser, BaseUserManager)
-from django.contrib.postgres.fields import JSONField
+from django.db.models import JSONField
 from django.core.serializers.json import DjangoJSONEncoder
 from datetime import datetime, timedelta
 import jwt
