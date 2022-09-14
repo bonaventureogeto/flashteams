@@ -1,11 +1,17 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
+from .models import Team
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class TeamSerializer(serializers.ModelSerializer):
     """
-    user serializer
+    serializer class for team
     """
+    name = serializers.CharField(max_length=255)
+    description = serializers.CharField(max_length=255)
+
     class Meta:
-        model = User
-        fields = ['url', 'username', 'email']
+        model = Team
+        fields = ["name", "description"]
+
+    def create(self, validated_data):
+        return Team.objects.create(**validated_data)
