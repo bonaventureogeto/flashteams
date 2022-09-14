@@ -26,4 +26,22 @@ class RegistrationAPIView(GenericAPIView):
         return Response(response, status=status.HTTP_201_CREATED)
 
 
+class LoginAPIView(GenericAPIView):
+    """ api view fo log in """
+
+    serializer_class = LoginSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.data
+
+        repsonse = {
+            "data": {
+                "user": dict(user),
+                "message": "You have successfuly logged in"
+            }
+        }
+
+        return Response(repsonse, status=status.HTTP_200_OK)
 
