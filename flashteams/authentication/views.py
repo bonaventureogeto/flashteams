@@ -2,12 +2,17 @@ from rest_framework.generics import GenericAPIView, CreateAPIView
 from authentication.serializers import RegistrationSerializer, LoginSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from .models import User
 
 
 class RegistrationAPIView(GenericAPIView):
     """Register new users."""
 
     serializer_class = RegistrationSerializer
+    queryset = User
+
+    def get_queryset(self):
+        return User.objects.all()
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -30,6 +35,10 @@ class LoginAPIView(GenericAPIView):
     """ api view fo log in """
 
     serializer_class = LoginSerializer
+    queryset = User
+
+    def get_queryset(self):
+        return User.objects.all()
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
