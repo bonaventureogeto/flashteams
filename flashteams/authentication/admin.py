@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, BlackList
+from .models import User
 
 
-admin.sit.register(User, BlackList)
+admin.site.register(User)
